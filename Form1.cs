@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
@@ -19,6 +20,7 @@ namespace Silent_dotnet_core
     public partial class Form1 : Form
     {
         bool cage=false;
+        private string AccessToken;
         DiscordSocketClient dsClient = new DiscordSocketClient();
         public static string[] users;
         public static string[] guilds;
@@ -36,6 +38,7 @@ namespace Silent_dotnet_core
             t1.Interval = 60000;
             t1.Tick += T1_Tick;
             Text = "SILENT Repeat off";
+            AccessToken = File.ReadAllText("token");
         }
 
         private async void T1_Tick(object sender, EventArgs e)
@@ -93,7 +96,7 @@ namespace Silent_dotnet_core
         private async void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text += Environment.NewLine + dsClient.LoginState;// + " " + dsClient.Status;
-            dsClient.LoginAsync(TokenType.Bot, "Njg0MTQ0MjgzOTMwMTk4MTE5.Xl6pPA.CxNVIBm-zaT3oOULYi2-vNcQ7mI").Wait();
+            dsClient.LoginAsync(TokenType.Bot, AccessToken).Wait();
             textBox1.Text += Environment.NewLine + dsClient.LoginState;// + " " + dsClient.Status;
             dsClient.MessageReceived += DsClient_MessageReceived;
             dsClient.StartAsync().Wait();
