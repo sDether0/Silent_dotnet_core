@@ -125,7 +125,7 @@ namespace Silent_dotnet_core
             }
             if (arg2.IsMuted || arg3.IsMuted || arg2.IsDeafened || arg3.IsDeafened)
             {
-                //UnMute();
+                UnMute();
             }
             if (!((IGuildUser)arg1).IsMuted && arg1==InMute)
             {
