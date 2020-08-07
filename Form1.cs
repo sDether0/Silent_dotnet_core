@@ -43,9 +43,9 @@ namespace Silent_dotnet_core
 
         private async void T1_Tick(object sender, EventArgs e)
         {
-            UnMe = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("עמנואל")).First();
-            UnMx = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("Whiskas(Макс)")).First();
-            UnBot = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("Silent")).First();
+            UnMe = dsClient.Guilds.First(x => x.Name == "S 682").Users.Where(x => x.Username.Equals("תאומיאל")).First();
+            UnMx = dsClient.Guilds.First(x => x.Name == "S 682").Users.Where(x => x.Username.Equals("Whiskas(Макс)")).First();
+            UnBot = dsClient.Guilds.First(x => x.Name == "S 682").Users.Where(x => x.Username.Equals("Silent")).First();
         }
 
         
@@ -57,38 +57,45 @@ namespace Silent_dotnet_core
 
         public async Task UnMute()
         {
-            if (UnMe == null)
+            await Task.Run(() =>
             {
-                UnMe = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("עמנואל")).First();
+                if (UnMe == null)
+                {
+                    UnMe = dsClient.Guilds.First(x=>x.Name=="S 682").Users.Where(x => x.Username.Equals("תאומיאל")).First();
 
-            }
-            if (UnMe.IsMuted || UnMe.IsDeafened)
-            {
-                _ = UnMe.ModifyAsync(x => x.Mute = false);
-                _ = UnMe.ModifyAsync(x => x.Deaf = false);
-            }
+                }
 
-            if (UnMx == null)
-            {
-                UnMx = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("Whiskas(Макс)")).First();
+                if (UnMe.IsMuted || UnMe.IsDeafened)
+                {
+                    _ = UnMe.ModifyAsync(x => x.Mute = false);
+                    _ = UnMe.ModifyAsync(x => x.Deaf = false);
+                }
 
-            }
-            if (UnMx.IsMuted || UnMx.IsDeafened)
-            {
-                _ = UnMx.ModifyAsync(x => x.Mute = false);
-                _ = UnMx.ModifyAsync(x => x.Deaf = false);
-            }
+                if (UnMx == null)
+                {
+                    UnMx = dsClient.Guilds.First(x => x.Name == "S 682").Users.Where(x => x.Username.Equals("Whiskas(Макс)")).First();
 
-            if (UnBot == null)
-            {
-                UnBot = dsClient.Guilds.First().Users.Where(x => x.Username.Equals("Silent")).First();
+                }
 
-            }
-            if (UnBot.IsMuted || UnBot.IsDeafened)
-            {
-                _ = UnBot.ModifyAsync(x => x.Mute = false);
-                _ = UnBot.ModifyAsync(x => x.Deaf = false);
-            }
+                if (UnMx.IsMuted || UnMx.IsDeafened)
+                {
+                    _ = UnMx.ModifyAsync(x => x.Mute = false);
+                    _ = UnMx.ModifyAsync(x => x.Deaf = false);
+                }
+
+                if (UnBot == null)
+                {
+                    UnBot = dsClient.Guilds.First(x => x.Name == "S 682").Users.Where(x => x.Username.Equals("Silent")).First();
+
+                }
+
+                if (UnBot.IsMuted || UnBot.IsDeafened)
+                {
+                    _ = UnBot.ModifyAsync(x => x.Mute = false);
+                    _ = UnBot.ModifyAsync(x => x.Deaf = false);
+                }
+            });
+
         }
 
         
